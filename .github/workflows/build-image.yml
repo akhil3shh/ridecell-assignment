@@ -29,4 +29,4 @@ jobs:
         run: |
           docker buildx create --use
           docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-          docker buildx build --push --tag $DOCKER_USERNAME/guestbook-go:${{ github.sha }} .
+          docker buildx build --push --tag $DOCKER_USERNAME/guestbook-go:latest .

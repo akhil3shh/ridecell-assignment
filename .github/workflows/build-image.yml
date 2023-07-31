@@ -29,4 +29,5 @@ jobs:
         run: |
           docker buildx create --use
           docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-          docker buildx build --push --tag $DOCKER_USERNAME/guestbook-go:latest .
+          IMAGE_TAG=$(echo "${{ github.sha }}" | head -c 7) # Using the first 7 characters of the commit SHA as the tag
+          docker buildx build --push --tag $DOCKER_USERNAME/guestbook-go:$IMAGE_TAG .

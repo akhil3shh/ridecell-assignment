@@ -29,4 +29,5 @@ jobs:
         run: |
           docker buildx create --use
           docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" 
-          docker buildx build --push --tag $DOCKER_USERNAME/test:latest .
+          IMAGE_TAG="${GITHUB_RUN_NUMBER}"
+          docker buildx build --push --tag $DOCKER_USERNAME/guestbook-go:$IMAGE_TAG .

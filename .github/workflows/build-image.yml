@@ -1,0 +1,32 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and Push
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker buildx create --use
+          docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+          docker buildx build --push --tag $DOCKER_USERNAME/guestbook-go:${{ github.sha }} .

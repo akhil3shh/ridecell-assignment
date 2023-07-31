@@ -30,4 +30,4 @@ jobs:
           docker buildx create --use
           docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
           IMAGE_TAG=$(echo "${{ github.sha }}" | tr -cd 'a-f0-9' | head -c 10) 
-          docker buildx build --push --tag $DOCKER_USERNAME/guestbook-go:$IMAGE_TAG .
+          docker buildx build --push --tag $DOCKER_USERNAME/test:$IMAGE_TAG .

@@ -13,7 +13,7 @@
 # limitations under the License.
 # test
 
-FROM golang:1.17.0
+FROM golang:1.10.0
 RUN go get github.com/codegangsta/negroni \
            github.com/gorilla/mux \
            github.com/xyproto/simpleredis/v2
